@@ -9,3 +9,15 @@ before_install:
 # by default npm test runs with the interactive CLI and hangs for user input. CI=true to force to run test automically once and exit
 script:
   - docker run -e CI=true booonard/udemy-docker-react npm run test 
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-2"
+  app: "udemy-docker-react"
+  env: "Udemydockerreact-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-2-263151155686"
+  bucket_path: "udemy-docker-react" # same as app name for the first time elastic beanstalk is used
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
