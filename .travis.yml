@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+language: generic
+
+before_install:
+  - docker build -t booonard/udemy-docker-react -f Dockerfile.dev . # the tag format booonard/udemy-docker-react is only for good convention
+
+# by default npm test runs with the interactive CLI and hangs for user input. CI=true to force to run test automically once and exit
+script:
+  - docker run -e CI=true booonard/udemy-docker-react npm run test 
